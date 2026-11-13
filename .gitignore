@@ -4,6 +4,12 @@ __pycache__/
 .pytest_cache/
 .venv/
 
+# Node
+node_modules/
+
+# Go (binary from `go build`)
+go/api-go
+
 # Local tooling
 .atl/
 
