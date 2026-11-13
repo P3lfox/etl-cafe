@@ -57,7 +57,9 @@ Run the tests with `uv run pytest` (no database needed).
 | `carga.py` | Step 2: load into MariaDB |
 | `db.py` | Shared DB connection (reads `.env`) |
 | `api.py` | Step 3: read-only REST API |
-| `tests/` | Tests for each step |
+| `api-node/` | Phase 2: the same API in Node.js + Express |
+| `tests/` | Tests for each step, plus the Python ↔ Node contract test |
+| `etl-cafe.pbix` | Power BI dashboard |
 
 ## 1. Dataset
 
@@ -217,10 +219,46 @@ Revenue Share % = DIVIDE([Total Revenue], CALCULATE([Total Revenue], ALL(sales[i
 | Treemap | `item` × Total Revenue, tooltip Revenue Share % | Each product's share |
 | Column chart | Weekday × Total Revenue | Busiest days of the week |
 
+## 6. Phase 2: polyglot API — `api-node/`
+
+The same API implemented in **Node.js + Express**, against the same database and
+the same `.env`. Clients such as Power BI only see HTTP + JSON, so they cannot tell
+which language serves them: the API is a **contract**, not a language.
+
+```bash
+cd api-node
+npm install
+npm start          # http://127.0.0.1:3000 (npm run dev restarts on file changes)
+npm test           # unit tests with a fake repository, no database needed
+```
+
+| Layer | Python (`api.py`) | Node (`api-node/src/`) |
+|-------|-------------------|------------------------|
+| Routes + validation | FastAPI + type hints | Express 5 + explicit parsing (`app.js`) |
+| SQL | `SalesRepository` | `SalesRepository` (`repository.js`), same queries |
+| Driver | PyMySQL | mysql2 (`decimalNumbers`, `dateStrings` to match Python's JSON) |
+| Port | 8000 | 3000 |
+
+### Contract test
+
+`tests/test_contract.py` sends the same requests to both APIs and asserts the
+**same status code and the same JSON body** (for invalid-parameter `422`s only the
+status is compared, because FastAPI uses its own error body format).
+
+```bash
+uv run uvicorn api:app --port 8000      # terminal 1
+cd api-node && npm start                # terminal 2
+PY_API_URL=http://127.0.0.1:8000 NODE_API_URL=http://127.0.0.1:3000 uv run pytest tests/test_contract.py
+```
+
+Without those variables the contract test is skipped, so `uv run pytest` works without servers.
+
+> Note: this is a *polyglot* architecture, not horizontal scaling. Horizontal scaling
+> means several copies of the **same** service behind a load balancer.
+
 ## Roadmap
 
 - [ ] **Remote hosting:** VPS (~USD 5/month) running MariaDB + API, with only the API
       exposed and MariaDB on localhost; or Railway as a managed alternative. Gives
       Power BI a fixed URL instead of the temporary tunnel.
-- [ ] **Polyglot API:** the same API in Node/Express against the same database, plus a
-      contract test asserting both return identical responses (based on `/openapi.json`).
+- [x] **Polyglot API:** Node/Express implementation with contract tests (see section 6).
