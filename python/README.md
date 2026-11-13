@@ -35,6 +35,7 @@ from any working directory.
 | `tests/test_carga.py` | Load helpers and schema parsing |
 | `tests/test_api.py` | Routes, validation and error codes, with a fake repository |
 | `tests/test_contract.py` | Cross-language contract test (needs running servers) |
+| `CODE_WALKTHROUGH.md` | Step-by-step explanation of how the code works |
 
 ## Cleaning — `limpieza.py`
 

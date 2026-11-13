@@ -35,6 +35,7 @@ que funcionan desde cualquier directorio.
 | `tests/test_carga.py` | Funciones auxiliares de la carga y lectura del esquema |
 | `tests/test_api.py` | Rutas, validación y códigos de error, con un repositorio falso |
 | `tests/test_contract.py` | Test de contrato entre lenguajes (necesita los servidores levantados) |
+| `CODE_WALKTHROUGH.es.md` | Explicación paso a paso de cómo funciona el código |
 
 ## Limpieza — `limpieza.py`
 

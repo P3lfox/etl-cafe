@@ -24,7 +24,7 @@ dirty_cafe_sales.csv ──► limpieza.py ──► cafe_sales_clean.csv ──
 
 | Ruta | Contenido | Documentación |
 |------|-----------|---------------|
-| `python/` | Limpieza, carga en la base, FastAPI (API de referencia) y todos los tests de Python | [python/README.es.md](python/README.es.md) |
+| `python/` | Limpieza, carga en la base, FastAPI (API de referencia) y todos los tests de Python | [python/README.es.md](python/README.es.md), [recorrido por el código](python/CODE_WALKTHROUGH.es.md) |
 | `node/` | La misma API en Node.js + Express | [node/README.es.md](node/README.es.md) |
 | `go/` | La misma API en Go | [go/README.es.md](go/README.es.md) |
 | `data/raw/` | Dataset crudo con errores | — |
