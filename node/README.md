@@ -1,5 +1,7 @@
 # Node.js — Express API
 
+**English** | [Español](README.es.md)
+
 The same read-only API as [`../python/api.py`](../python/api.py), written in
 **Node.js + Express 5**, against the same MariaDB database. It follows the
 [API contract](../README.md#api-contract) and is verified by the cross-language

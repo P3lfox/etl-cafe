@@ -1,5 +1,7 @@
 # etl-cafe
 
+**English** | [Español](README.es.md)
+
 End-to-end data pipeline: a **dirty** cafe sales dataset is cleaned, loaded into a
 normalized **MariaDB** database, served by a read-only **REST API**, and visualized
 in a **Power BI** dashboard. The API is implemented in **three languages**

@@ -1,5 +1,7 @@
 # Python — ETL + reference API
 
+**English** | [Español](README.es.md)
+
 The Python side runs the **whole data pipeline** (cleaning and loading) and serves
 the **reference API** that the Node and Go implementations are tested against.
 Project overview: [../README.md](../README.md).
