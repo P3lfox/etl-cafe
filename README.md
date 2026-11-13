@@ -1,5 +1,7 @@
 # etl-cafe
 
+**English** | [Español](README.es.md)
+
 End-to-end data pipeline: a **dirty** cafe sales dataset is cleaned, loaded into a
 normalized **MariaDB** database, served by a read-only **REST API**, and visualized
 in a **Power BI** dashboard. The API is implemented in **three languages**
@@ -21,7 +23,7 @@ exactly: **80,041.50** revenue, **9,064** transactions, **27,358** units sold,
 
 | Path | Contents | Docs |
 |------|----------|------|
-| `python/` | Cleaning, database load, FastAPI (reference API), all Python tests | [python/README.md](python/README.md) |
+| `python/` | Cleaning, database load, FastAPI (reference API), all Python tests | [python/README.md](python/README.md), [code walkthrough](python/CODE_WALKTHROUGH.md) |
 | `node/` | The same API in Node.js + Express | [node/README.md](node/README.md) |
 | `go/` | The same API in Go | [go/README.md](go/README.md) |
 | `data/raw/` | Raw dataset with errors | — |

@@ -1,5 +1,7 @@
 # Go — net/http API
 
+**English** | [Español](README.es.md)
+
 The same read-only API as [`../python/api.py`](../python/api.py), written in **Go**
 with only the standard library router, against the same MariaDB database. It follows
 the [API contract](../README.md#api-contract) and is verified by the cross-language

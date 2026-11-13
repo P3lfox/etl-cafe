@@ -1,5 +1,7 @@
 # Design decisions and limitations
 
+**English** | [Español](decisions.es.md)
+
 Why the project is built the way it is, which alternatives were discarded, and what it
 does **not** do well. Project overview: [../README.md](../README.md).
 

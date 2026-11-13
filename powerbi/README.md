@@ -1,5 +1,7 @@
 # Power BI dashboard — step-by-step guide
 
+**English** | [Español](README.es.md)
+
 How to build the cafe sales dashboard (`etl-cafe.pbix`) from scratch: connect Power BI
 to the API, model the data, write the DAX measures, build the visuals, and check that
 the numbers are right. Project overview: [../README.md](../README.md).
