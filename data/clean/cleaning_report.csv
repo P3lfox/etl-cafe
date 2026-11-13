@@ -1,0 +1,13 @@
+metric,value
+rows_input,10000
+dropped_duplicates,0
+dropped_invalid_date,460
+dropped_unrecoverable,476
+dropped_inconsistent_total,0
+rebuilt_item,471
+rebuilt_quantity,431
+rebuilt_price_per_unit,500
+rebuilt_total_spent,453
+filled_unknown_payment_method,2870
+filled_unknown_location,3592
+rows_output,9064
