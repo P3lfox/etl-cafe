@@ -1,4 +1,4 @@
-// HTTP layer of the Node API. Same contract as ../../api.py:
+// HTTP layer of the Node API. Same contract as ../../python/api.py:
 // GET /sales, GET /sales/:transactionId, GET /summary — read-only, JSON.
 import express from "express";
 

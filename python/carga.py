@@ -13,8 +13,9 @@ import pandas as pd
 
 from db import connect
 
-CLEAN_FILE = Path("data/clean/cafe_sales_clean.csv")
-SCHEMA_FILE = Path("sql/schema.sql")
+ROOT = Path(__file__).resolve().parent.parent  # repo root: data/ and sql/ are shared
+CLEAN_FILE = ROOT / "data/clean/cafe_sales_clean.csv"
+SCHEMA_FILE = ROOT / "sql/schema.sql"
 
 
 def build_menu(df: pd.DataFrame) -> dict[str, float]:

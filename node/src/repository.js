@@ -1,5 +1,5 @@
 // All SQL lives here; the routes in app.js only deal with HTTP.
-// Mirrors SalesRepository in ../../api.py so both APIs return the same data.
+// Mirrors SalesRepository in ../../python/api.py so all APIs return the same data.
 import mysql from "mysql2/promise";
 
 /** Any driver failure (connection refused, timeout, bad credentials...). Mapped to HTTP 503. */
@@ -92,7 +92,7 @@ export class SalesRepository {
   }
 }
 
-/** Connection pool configured from the same .env as the Python side (see ../../db.py). */
+/** Connection pool configured from the same .env as the Python side (see ../../python/db.py). */
 export function createPool() {
   return mysql.createPool({
     host: process.env.DB_HOST ?? "127.0.0.1",

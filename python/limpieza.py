@@ -17,9 +17,10 @@ from pathlib import Path
 
 import pandas as pd
 
-RAW_FILE = Path("data/raw/dirty_cafe_sales.csv")
-CLEAN_FILE = Path("data/clean/cafe_sales_clean.csv")
-REPORT_FILE = Path("data/clean/cleaning_report.csv")
+ROOT = Path(__file__).resolve().parent.parent  # repo root: data/ is shared by all languages
+RAW_FILE = ROOT / "data/raw/dirty_cafe_sales.csv"
+CLEAN_FILE = ROOT / "data/clean/cafe_sales_clean.csv"
+REPORT_FILE = ROOT / "data/clean/cleaning_report.csv"
 
 COLUMN_NAMES = {
     "Transaction ID": "transaction_id",
@@ -135,8 +136,8 @@ def main() -> None:
     for metric, value in report.items():
         print(f"{metric:<32}{value:>8}")
     print("-" * 40)
-    print(f"Clean file:  {CLEAN_FILE}")
-    print(f"Report file: {REPORT_FILE}")
+    print(f"Clean file:  {CLEAN_FILE.relative_to(ROOT)}")
+    print(f"Report file: {REPORT_FILE.relative_to(ROOT)}")
 
 
 if __name__ == "__main__":

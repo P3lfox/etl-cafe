@@ -1,17 +1,21 @@
 """Shared MariaDB / MySQL connection settings for carga.py and api.py.
 
-Settings come from environment variables (or a .env file):
-DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DB_NAME.
+Settings come from environment variables, or from the .env file at the repo
+root (shared with the Node and Go APIs): DB_HOST, DB_PORT, DB_USER,
+DB_PASSWORD, DB_NAME.
 """
 
 import os
+from pathlib import Path
 
 import pymysql
 from dotenv import load_dotenv
 
+ENV_FILE = Path(__file__).resolve().parent.parent / ".env"
+
 
 def connect(**options) -> pymysql.connections.Connection:
-    load_dotenv()
+    load_dotenv(ENV_FILE)
     return pymysql.connect(
         host=os.getenv("DB_HOST", "127.0.0.1"),
         port=int(os.getenv("DB_PORT", "3306")),
