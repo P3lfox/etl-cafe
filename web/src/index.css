@@ -1,0 +1,330 @@
+/* Color roles (light). Charts and UI use roles, never raw hex. */
+:root {
+  color-scheme: light;
+  --page: #f9f9f7;
+  --surface-1: #fcfcfb;
+  --text-primary: #0b0b0b;
+  --text-secondary: #52514e;
+  --text-muted: #898781;
+  --grid: #e1e0d9;
+  --axis: #c3c2b7;
+  --border: rgba(11, 11, 11, 0.1);
+  --hover-wash: rgba(11, 11, 11, 0.04);
+  --series-1: #2a78d6; /* blue: single-series marks, positive growth */
+  --series-negative: #e34948; /* red: negative growth (diverging pole) */
+  --series-missing: #c3c2b7; /* gray: "Unknown" = missing data, not a category */
+  --focus: #2a78d6;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:where(:not([data-theme="light"])) {
+    color-scheme: dark;
+    --page: #0d0d0d;
+    --surface-1: #1a1a19;
+    --text-primary: #f0efec;
+    --text-secondary: #c3c2b7;
+    --text-muted: #898781;
+    --grid: #2c2c2a;
+    --axis: #383835;
+    --border: rgba(255, 255, 255, 0.1);
+    --hover-wash: rgba(255, 255, 255, 0.06);
+    --series-1: #3987e5;
+    --series-negative: #e66767;
+    --series-missing: #5c5b57;
+    --focus: #3987e5;
+  }
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --page: #0d0d0d;
+  --surface-1: #1a1a19;
+  --text-primary: #f0efec;
+  --text-secondary: #c3c2b7;
+  --text-muted: #898781;
+  --grid: #2c2c2a;
+  --axis: #383835;
+  --border: rgba(255, 255, 255, 0.1);
+  --hover-wash: rgba(255, 255, 255, 0.06);
+  --series-1: #3987e5;
+  --series-negative: #e66767;
+  --series-missing: #5c5b57;
+  --focus: #3987e5;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--page);
+  color: var(--text-primary);
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  line-height: 1.4;
+}
+
+.app {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px 16px 48px;
+}
+
+.app-header h1 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.app-header p {
+  margin: 4px 0 0;
+  color: var(--text-secondary);
+}
+
+/* Filter row: one row above everything it scopes. */
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 16px;
+  margin: 20px 0;
+}
+
+.segmented {
+  display: inline-flex;
+  flex-wrap: wrap;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--surface-1);
+}
+
+.segmented button,
+.toggle button {
+  border: 0;
+  background: transparent;
+  color: var(--text-secondary);
+  font: inherit;
+  font-size: 0.875rem;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+
+.segmented button:hover,
+.toggle button:hover {
+  background: var(--hover-wash);
+}
+
+.segmented button[aria-pressed="true"],
+.toggle button[aria-pressed="true"] {
+  color: var(--text-primary);
+  font-weight: 600;
+  background: var(--hover-wash);
+}
+
+button:focus-visible,
+input:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+.custom-range {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+}
+
+.custom-range input {
+  font: inherit;
+  color: var(--text-primary);
+  background: var(--surface-1);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 4px 6px;
+}
+
+/* KPI tiles */
+.kpis {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.tile,
+.card {
+  background: var(--surface-1);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+
+.tile {
+  padding: 16px;
+}
+
+.tile-label {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+}
+
+.tile-value {
+  font-size: 1.75rem;
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+@media (max-width: 600px) {
+  .tile-value {
+    font-size: 1.375rem;
+  }
+
+  /* On narrow charts the end label collides with the line; tooltip and table keep the value. */
+  .end-label {
+    display: none;
+  }
+}
+
+/* Chart cards */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+@media (min-width: 900px) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.card {
+  padding: 16px;
+  min-width: 0; /* lets charts shrink inside the grid */
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.card-header h2 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.card-header p {
+  margin: 2px 0 0;
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+}
+
+.toggle {
+  display: inline-flex;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.toggle button {
+  padding: 4px 8px;
+  font-size: 0.8125rem;
+}
+
+/* Hold the previous render while refetching: no skeleton flash, no layout jump. */
+.content {
+  transition: opacity 150ms;
+}
+
+.content.is-loading {
+  opacity: 0.5;
+}
+
+/* Tables (the accessible twin of every chart) */
+.table-wrap {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 6px 8px;
+  border-bottom: 1px solid var(--grid);
+}
+
+th {
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+td.num,
+th.num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Tooltip */
+.tooltip {
+  background: var(--surface-1);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px 10px;
+  font-size: 0.8125rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.tooltip-title {
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.tooltip-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  color: var(--text-secondary);
+}
+
+.tooltip-row strong {
+  color: var(--text-primary);
+  font-variant-numeric: tabular-nums;
+}
+
+.note {
+  color: var(--text-muted);
+  font-size: 0.8125rem;
+  margin: 8px 0 0;
+}
+
+.error {
+  background: var(--surface-1);
+  border: 1px solid var(--series-negative);
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.error strong {
+  display: block;
+  margin-bottom: 4px;
+}
+
+.app-footer {
+  margin-top: 24px;
+  color: var(--text-muted);
+  font-size: 0.8125rem;
+}
+
+.app-footer code {
+  color: var(--text-secondary);
+}
