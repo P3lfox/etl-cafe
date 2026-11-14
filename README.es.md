@@ -30,12 +30,15 @@ dirty_cafe_sales.csv ──► limpieza.py ──► cafe_sales_clean.csv ──
 | `data/raw/` | Dataset crudo con errores | — |
 | `data/clean/` | Tabla limpia + reporte de limpieza (generados por `python/limpieza.py`) | — |
 | `sql/schema.sql` | Esquema normalizado de la base de datos | más abajo |
-| `docs/` | Decisiones de diseño, limitaciones conocidas, fuentes de datos y alternativas | [docs/decisions.es.md](docs/decisions.es.md), [docs/sources-and-alternatives.es.md](docs/sources-and-alternatives.es.md) |
+| `docs/` | Decisiones de diseño, limitaciones conocidas, fuentes de datos y alternativas, instalación en Windows | [docs/decisions.es.md](docs/decisions.es.md), [docs/sources-and-alternatives.es.md](docs/sources-and-alternatives.es.md), [docs/windows-setup.es.md](docs/windows-setup.es.md) |
 | `powerbi/` | Dashboard de Power BI (`etl-cafe.pbix`) + guía paso a paso | [powerbi/README.es.md](powerbi/README.es.md) |
 | `web/` | Dashboard web en React (funciona en cualquier sistema operativo) | [web/README.es.md](web/README.es.md) |
 | `.env` | Credenciales de la base, compartidas por todos los lenguajes (ignorado por git) | más abajo |
 
 ## Inicio rápido
+
+> **¿En Windows?** Los comandos de abajo son para Linux; en su lugar, seguir
+> [docs/windows-setup.es.md](docs/windows-setup.es.md).
 
 1. **Crear la base de datos y un usuario dedicado** (en MariaDB, `root` suele requerir `sudo`):
    ```bash
