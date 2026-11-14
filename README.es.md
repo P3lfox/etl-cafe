@@ -30,8 +30,9 @@ dirty_cafe_sales.csv ──► limpieza.py ──► cafe_sales_clean.csv ──
 | `data/raw/` | Dataset crudo con errores | — |
 | `data/clean/` | Tabla limpia + reporte de limpieza (generados por `python/limpieza.py`) | — |
 | `sql/schema.sql` | Esquema normalizado de la base de datos | más abajo |
-| `docs/` | Decisiones de diseño, alternativas descartadas y limitaciones conocidas | [docs/decisions.es.md](docs/decisions.es.md) |
+| `docs/` | Decisiones de diseño, limitaciones conocidas, fuentes de datos y alternativas | [docs/decisions.es.md](docs/decisions.es.md), [docs/sources-and-alternatives.es.md](docs/sources-and-alternatives.es.md) |
 | `powerbi/` | Dashboard de Power BI (`etl-cafe.pbix`) + guía paso a paso | [powerbi/README.es.md](powerbi/README.es.md) |
+| `web/` | Dashboard web en React (funciona en cualquier sistema operativo) | [web/README.es.md](web/README.es.md) |
 | `.env` | Credenciales de la base, compartidas por todos los lenguajes (ignorado por git) | más abajo |
 
 ## Inicio rápido
@@ -64,6 +65,10 @@ dirty_cafe_sales.csv ──► limpieza.py ──► cafe_sales_clean.csv ──
    | Python | `cd python && uv run uvicorn api:app --reload` | <http://127.0.0.1:8000/docs> |
    | Node | `cd node && npm install && npm start` | <http://127.0.0.1:3000/summary> |
    | Go | `cd go && go run .` | <http://127.0.0.1:8080/summary> |
+
+5. **Abrir un dashboard:** el web con `cd web && npm install && npm run dev`
+   (<http://localhost:5173>, ver [web/README.es.md](web/README.es.md)), o Power BI en Windows
+   (ver [powerbi/README.es.md](powerbi/README.es.md)).
 
 ## Dataset
 
@@ -140,6 +145,12 @@ funciona en Windows, se accede a la API a través de un Cloudflare Quick Tunnel 
 
 Guía paso a paso, desde la instalación de Power BI hasta la resolución de problemas:
 [powerbi/README.es.md](powerbi/README.es.md).
+
+## Dashboard web
+
+`web/` muestra los mismos KPIs en el navegador con React y Recharts, en cualquier sistema
+operativo, con un filtro de fechas y una vista de tabla en cada gráfico. Un proxy de Vite
+reenvía `/api` a la API elegida con `API_TARGET`. Ver [web/README.es.md](web/README.es.md).
 
 ## Hoja de ruta
 
