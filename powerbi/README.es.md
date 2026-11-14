@@ -200,7 +200,7 @@ Revenue Share % = DIVIDE([Total Revenue], CALCULATE([Total Revenue], ALL(sales[i
 se calculan **filtradas** a Coffee. En `Revenue Share %` el numerador es la facturación de
 Coffee, mientras que `CALCULATE([Total Revenue], ALL(sales[item]))` **quita el filtro de
 producto** y da la facturación total. El resultado es el porcentaje de Coffee. `CALCULATE`
-significa "calculá esto, pero cambiando los filtros"; `DATEADD` y `ALL` son dos maneras de
+significa "calcular esto, pero cambiando los filtros"; `DATEADD` y `ALL` son dos maneras de
 cambiarlos.
 
 ### Formato de porcentaje
